@@ -1,5 +1,7 @@
 <?php
 
+namespace Tests\Ottaviano\Messenger;
+
 use Ottaviano\Messenger\LoggerSender;
 use Ottaviano\Messenger\Stamp\LogLevelStamp;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -30,7 +32,7 @@ class LoggerSenderTest extends TestCase
      */
     public function testSendWithMessageNotStringify()
     {
-        $this->sender->send($this->createEnvelope(new stdClass()));
+        $this->sender->send($this->createEnvelope(new \stdClass()));
     }
 
     public function testSendCallSerializerEncodeMethod()
@@ -67,7 +69,7 @@ class LoggerSenderTest extends TestCase
         $this->loggerMock
             ->expects($this->once())
             ->method('log')
-            ->with(LogLevel::INFO)
+            ->with(LogLevel::INFO, $this->isInstanceOf(Message::class))
         ;
 
         $this->sender->send($this->createEnvelope(new Message()));
