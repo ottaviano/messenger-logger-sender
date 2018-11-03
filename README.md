@@ -16,3 +16,40 @@ composer require ottaviano/messenger-logger-sender
 ## Beta
 
 This lib is in Beta version as the component Messenger is in Beta too.
+
+## Example
+
+### Monolog & StreamHandler
+
+```php
+$loggerSender = new \Ottaviano\Messenger\LoggerSender(
+    new \Monolog\Logger(
+        'default', 
+        [
+            new \Monolog\Handler\StreamHandler(STDOUT),
+        ]
+    )
+);
+
+$middlewares = [
+    new \Symfony\Component\Messenger\Middleware\SendMessageMiddleware(
+        new \Symfony\Component\Messenger\Transport\Sender\SendersLocator([
+            '*' => [$loggerSender],
+        ])
+    ),
+];
+
+$bus = new \Symfony\Component\Messenger\MessageBus($middlewares);
+
+$message = new class {
+    function __toString() {
+        return 'Hey!';
+    }
+};
+
+$bus->dispatch($message);
+```
+it will output:
+```
+[2018-11-03 18:26:26] default.INFO: Hey! {"message":"[object] (class@anonymous\u0000/Users/dimitri/Projects/test-messenger/script4.php0x101422223: Hey!)"} []
+```
