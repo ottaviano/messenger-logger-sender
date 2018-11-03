@@ -10,3 +10,7 @@ provides a lot of handlers like `StreamHandler`, `RavenHandler`, `SlackHandler`,
 ```bash
 composer require ottaviano/messenger-logger-sender
 ```
+
+## Beta
+
+This lib is in Beta version as the component Messenger is in Beta too.

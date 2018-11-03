@@ -1,6 +1,7 @@
 {
     "name": "ottaviano/messenger-logger-sender",
     "description": "LoggerSender for Symfony Messenger component",
+    "type": "library",
     "license": "MIT",
     "authors": [
         {
