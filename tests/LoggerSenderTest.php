@@ -73,7 +73,7 @@ class LoggerSenderTest extends TestCase
         $this->sender->send($this->createEnvelope(new Message()));
     }
 
-    private function createEnvelope(object $message): Envelope
+    private function createEnvelope($message): Envelope
     {
         return new Envelope($message);
     }
